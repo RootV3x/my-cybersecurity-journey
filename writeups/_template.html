@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hack The Box write-up - cybersecurity leerjournaal van Azzemon.">
+  <title>HTB Write-up Template | Azzemon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="writeup-page">
+  <header class="site-header">
+    <a class="logo" href="../index.html"><span>&gt;_</span> Azzemon</a>
+    <a class="writeup-back" href="../index.html#writeups">← Terug naar write-ups</a>
+  </header>
+
+  <main>
+    <div class="writeup-hero">
+      <p class="eyebrow">HACK THE BOX • WRITE-UP TEMPLATE</p>
+      <h1>Hack The Box — [Machine]</h1>
+      <p>
+        Een compacte technische write-up waarin ik de relevante aanvalsketen beschrijf,
+        met nadruk op mijn keuzes en leerpunten. Flags, doel-IP-adressen en gevoelige
+        gegevens zijn bewust weggelaten.
+      </p>
+      <div class="writeup-summary">
+        <span>Difficulty: [Easy / Medium / Hard]</span>
+        <span>OS: [Linux / Windows]</span>
+        <span>Focus: [Technique]</span>
+      </div>
+    </div>
+
+    <nav class="writeup-toc" aria-label="Inhoudsopgave">
+      <strong>WRITE-UP SECTIONS</strong>
+      <a href="#overview">Overview</a>
+      <a href="#recon">Recon</a>
+      <a href="#enumeration">Enumeration</a>
+      <a href="#access">Initial Access</a>
+      <a href="#privesc">Privilege Escalation</a>
+      <a href="#attack-path">Attack Path</a>
+      <a href="#lessons">Lessons Learned</a>
+    </nav>
+
+    <article class="writeup-article">
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          In deze lab lag de focus voornamelijk op <strong>[onderwerp]</strong>.
+          De aanvalsketen was in het kort:
+          <strong>Recon → Enumeration → Initial Access → Privilege Escalation</strong>.
+        </p>
+      </section>
+
+      <section id="recon">
+        <h2>Reconnaissance</h2>
+        <p>Ik begon de machine met mijn <strong>Superscanv2</strong> workflow.</p>
+        <table class="writeup-table">
+          <thead><tr><th>Port</th><th>Service</th><th>Waarom interessant?</th></tr></thead>
+          <tbody>
+            <tr><td>XX</td><td>HTTP</td><td>Webapplicatie aanwezig</td></tr>
+            <tr><td>XX</td><td>SSH</td><td>Mogelijke remote toegang</td></tr>
+            <tr><td>XX</td><td>[Service]</td><td>[Relevantie]</td></tr>
+          </tbody>
+        </table>
+        <p>Niet iedere service bleek relevant. Ik richtte mij daarom voornamelijk op <strong>[service]</strong>.</p>
+      </section>
+
+      <section id="enumeration">
+        <h2>Enumeration</h2>
+        <p>Tijdens verdere enumeratie ontdekte ik:</p>
+        <ul>
+          <li>[Belangrijkste bevinding]</li>
+          <li>[Interessante directory/share/configuratie]</li>
+          <li>[Technologie of softwareversie]</li>
+        </ul>
+        <div class="writeup-callout">[Korte omschrijving van de belangrijkste aanwijzing.]</div>
+        <p>Deze aanwijzing gaf richting aan het verdere onderzoek naar <strong>[techniek of kwetsbaarheid]</strong>.</p>
+      </section>
+
+      <section id="access">
+        <h2>Initial Access</h2>
+        <p>
+          Uit de enumeratie bleek dat <strong>[korte omschrijving]</strong> aanwezig was.
+          Door deze zwakke plek gecontroleerd te benutten verkreeg ik toegang als een
+          gebruiker met beperkte rechten.
+        </p>
+        <div class="attack-path">[kwetsbaarheid] → [effect] → initial access</div>
+      </section>
+
+      <section id="privesc">
+        <h2>Privilege Escalation</h2>
+        <p>
+          Na initial access onderzocht ik onder andere gebruikersrechten, sudo/SUID,
+          services, configuratiebestanden en geplande taken. De belangrijkste ontdekking
+          was <strong>[bevinding]</strong>.
+        </p>
+        <p>Door <strong>[korte uitleg]</strong> kon ik mijn rechten verhogen.</p>
+      </section>
+
+      <section id="attack-path">
+        <h2>Attack Path</h2>
+        <div class="attack-path">Superscanv2
+    ↓
+Open services identificeren
+    ↓
+[Interessante service]
+    ↓
+Enumeration
+    ↓
+[Belangrijkste bevinding]
+    ↓
+Initial Access
+    ↓
+Lokale enumeratie
+    ↓
+[Privilege Escalation techniek]
+    ↓
+Administrator / Root</div>
+      </section>
+
+      <section id="lessons">
+        <h2>Wat ik hiervan heb geleerd</h2>
+        <ul>
+          <li><strong>[Techniek 1]</strong></li>
+          <li><strong>[Techniek 2]</strong></li>
+          <li><strong>[Techniek 3]</strong></li>
+        </ul>
+        <div class="writeup-callout">[Mijn belangrijkste leerpunt in één of twee zinnen.]</div>
+
+        <h3>Gebruikte tools</h3>
+        <div class="tags">
+          <span>Superscanv2</span><span>[Tool]</span><span>[Tool]</span><span>[Tool]</span>
+        </div>
+      </section>
+    </article>
+
+    <p class="writeup-disclaimer">
+      Deze write-up is uitsluitend bedoeld voor educatieve doeleinden binnen een
+      gecontroleerde Hack The Box-omgeving. IP-adressen, flags, wachtwoorden en andere
+      gevoelige gegevens worden niet gepubliceerd.
+    </p>
+  </main>
+</body>
+</html>

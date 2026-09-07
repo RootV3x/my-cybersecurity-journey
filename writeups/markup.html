@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hack The Box Markup write-up - web enumeration, XXE, SSH en Windows privilege escalation via een schrijfbaar batchbestand.">
+  <title>HTB Markup Write-up | Azzemon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="writeup-page">
+  <header class="site-header">
+    <a class="logo" href="../index.html"><span>&gt;_</span> Azzemon</a>
+    <a class="writeup-back" href="../index.html#writeups">← Terug naar write-ups</a>
+  </header>
+
+  <main>
+    <div class="writeup-hero">
+      <p class="eyebrow">HACK THE BOX • MARKUP</p>
+      <h1>Hack The Box — Markup</h1>
+      <p>
+        Een compacte technische write-up over een aanvalsketen via een kwetsbare XML-parser,
+        het uitlezen van een SSH-private key en een Windows privilege-escalatie via een
+        schrijfbaar batchbestand dat met verhoogde rechten wordt uitgevoerd. Flags,
+        doel-IP-adressen en wachtwoorden zijn bewust weggelaten.
+      </p>
+      <div class="writeup-summary">
+        <span>Difficulty: Easy</span>
+        <span>OS: Windows</span>
+        <span>Focus: XXE • SSH • File Permissions</span>
+      </div>
+    </div>
+
+    <nav class="writeup-toc" aria-label="Inhoudsopgave">
+      <strong>WRITE-UP SECTIONS</strong>
+      <a href="#overview">Overview</a>
+      <a href="#recon">Recon</a>
+      <a href="#enumeration">Enumeration</a>
+      <a href="#access">Initial Access</a>
+      <a href="#privesc">Privilege Escalation</a>
+      <a href="#attack-path">Attack Path</a>
+      <a href="#lessons">Lessons Learned</a>
+    </nav>
+
+    <article class="writeup-article">
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          In deze lab lag de focus voornamelijk op <strong>web enumeration, XML External
+          Entity (XXE), SSH-toegang en Windows privilege escalation via onveilige
+          bestandsrechten</strong>.
+        </p>
+        <div class="attack-path">Recon → Web Enumeration → XXE → Initial Access → Privilege Escalation</div>
+      </section>
+
+      <section id="recon">
+        <h2>Reconnaissance</h2>
+        <p>Ik begon de machine met mijn <strong>Superscanv2</strong>-workflow.</p>
+        <table class="writeup-table">
+          <thead>
+            <tr><th>Port</th><th>Service</th><th>Waarom interessant?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>80/tcp</td><td>HTTP</td><td>Webapplicatie aanwezig voor verdere enumeratie</td></tr>
+            <tr><td>22/tcp</td><td>SSH</td><td>Mogelijke remote toegang zodra geldige authenticatie beschikbaar is</td></tr>
+          </tbody>
+        </table>
+        <p>
+          Omdat er zowel een webapplicatie als een SSH-service bereikbaar was, lag de
+          eerste focus op de webapplicatie om informatie of authenticatiemateriaal te vinden
+          dat later voor SSH gebruikt kon worden.
+        </p>
+      </section>
+
+      <section id="enumeration">
+        <h2>Enumeration</h2>
+        <p>
+          Na toegang tot de webapplicatie onderzocht ik de functionaliteit en de HTTP-verzoeken
+          die door de applicatie werden verstuurd. Een onderdeel van de applicatie verwerkte
+          invoer als <strong>XML</strong>.
+        </p>
+        <ul>
+          <li><strong>XML-verwerking:</strong> gebruikersinvoer werd door een XML-parser verwerkt.</li>
+          <li><strong>XXE:</strong> externe XML-entiteiten werden niet veilig uitgeschakeld.</li>
+          <li><strong>Local File Read:</strong> hierdoor konden lokale bestanden vanaf het Windows-systeem worden uitgelezen.</li>
+          <li><strong>SSH-key:</strong> de private SSH-sleutel van gebruiker <code>daniel</code> kon worden benaderd via <code>C:\Users\daniel\.ssh\id_rsa</code>.</li>
+        </ul>
+        <div class="writeup-callout">
+          De belangrijkste aanwijzing was dat de XML-parser externe entiteiten accepteerde.
+          Daarmee veranderde een webkwetsbaarheid in een manier om gevoelige lokale bestanden
+          van het systeem uit te lezen.
+        </div>
+      </section>
+
+      <section id="access">
+        <h2>Initial Access</h2>
+        <p>
+          De XXE-kwetsbaarheid maakte het mogelijk om de private SSH-sleutel van de lokale
+          gebruiker <code>daniel</code> uit te lezen. De sleutel werd lokaal opgeslagen en met
+          passende bestandsrechten gebruikt voor authenticatie tegen de reeds ontdekte
+          SSH-service.
+        </p>
+        <div class="attack-path">XXE → SSH private key → SSH authentication → toegang als daniel</div>
+        <p>
+          Hiermee verkreeg ik interactieve toegang tot het Windows-systeem als een gebruiker
+          met beperkte rechten. De private sleutel zelf wordt uiteraard niet in deze write-up
+          gepubliceerd.
+        </p>
+      </section>
+
+      <section id="privesc">
+        <h2>Privilege Escalation</h2>
+        <p>
+          Na initial access begon ik met lokale Windows-enumeratie. Daarbij controleerde ik
+          onder andere gebruikersrechten, services, geplande of periodiek uitgevoerde taken,
+          interessante directories en de toegangsrechten op scripts en bestanden.
+        </p>
+        <p>
+          In <code>C:\Log-Management\</code> werd het batchbestand <code>job.bat</code>
+          aangetroffen. Het bestand werd periodiek met verhoogde rechten uitgevoerd, terwijl
+          een normale gebruiker het bestand kon wijzigen.
+        </p>
+        <p>
+          Deze combinatie vormde de privilege-escalatie: door de inhoud van het batchbestand
+          aan te passen, kon bij de volgende uitvoering een reverse shell worden gestart in de
+          context van het verhoogde proces. Daardoor werd uiteindelijk een shell met
+          <strong>Administrator-rechten</strong> verkregen.
+        </p>
+        <div class="attack-path">Writable job.bat → elevated execution → reverse shell → Administrator</div>
+      </section>
+
+      <section id="attack-path">
+        <h2>Attack Path</h2>
+        <div class="attack-path">Superscanv2 / Nmap
+    ↓
+HTTP + SSH identificeren
+    ↓
+Webapplicatie enumereren
+    ↓
+XML-functionaliteit ontdekken
+    ↓
+XXE bevestigen
+    ↓
+Private SSH-key uitlezen
+    ↓
+SSH-toegang als daniel
+    ↓
+Lokale Windows-enumeratie
+    ↓
+Schrijfbaar job.bat ontdekken
+    ↓
+Batchbestand wordt met verhoogde rechten uitgevoerd
+    ↓
+Reverse shell
+    ↓
+Administrator Access</div>
+      </section>
+
+      <section id="lessons">
+        <h2>Wat ik hiervan heb geleerd</h2>
+        <ul>
+          <li><strong>XXE:</strong> een onveilig geconfigureerde XML-parser kan toegang geven tot lokale bestanden op het systeem.</li>
+          <li><strong>Attack chaining:</strong> informatie uit een webkwetsbaarheid kan direct bruikbaar zijn voor een andere service zoals SSH.</li>
+          <li><strong>Windows file permissions:</strong> een schrijfbaar script dat door een verhoogd proces wordt uitgevoerd kan leiden tot privilege escalation.</li>
+        </ul>
+        <div class="writeup-callout">
+          Mijn belangrijkste leerpunt uit deze machine is dat de echte impact vaak ontstaat
+          door kwetsbaarheden aan elkaar te koppelen. De XXE alleen gaf nog geen interactieve
+          toegang, maar leverde precies het authenticatiemateriaal op dat nodig was voor SSH.
+          Daarna maakte een lokale rechtenfout de stap naar Administrator mogelijk.
+        </div>
+
+        <h3>Gebruikte tools</h3>
+        <div class="tags">
+          <span>Superscanv2</span>
+          <span>Nmap</span>
+          <span>Burp Suite</span>
+          <span>SSH</span>
+          <span>Netcat</span>
+          <span>PowerShell</span>
+        </div>
+      </section>
+    </article>
+
+    <p class="writeup-disclaimer">
+      Deze write-up is uitsluitend bedoeld voor educatieve doeleinden binnen een
+      gecontroleerde Hack The Box-omgeving. IP-adressen, flags, wachtwoorden, private
+      sleutels en andere gevoelige gegevens worden niet gepubliceerd.
+    </p>
+  </main>
+</body>
+</html>

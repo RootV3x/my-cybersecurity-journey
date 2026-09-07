@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hack The Box Included write-up - TFTP, web enumeration en LXD privilege escalation.">
+  <title>HTB Included Write-up | Azzemon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body class="writeup-page">
+  <header class="site-header">
+    <a class="logo" href="../index.html"><span>&gt;_</span> Azzemon</a>
+    <a class="writeup-back" href="../index.html#writeups">← Terug naar write-ups</a>
+  </header>
+
+  <main>
+    <div class="writeup-hero">
+      <p class="eyebrow">HACK THE BOX • INCLUDED</p>
+      <h1>Hack The Box — Included</h1>
+      <p>
+        Een compacte technische write-up over een aanvalsketen waarin een onbeveiligde
+        TFTP-service, credential reuse en te ruime LXD-rechten uiteindelijk leiden tot
+        volledige systeemtoegang. Flags, doel-IP-adressen en wachtwoorden zijn bewust
+        weggelaten.
+      </p>
+      <div class="writeup-summary">
+        <span>Difficulty: Very Easy</span>
+        <span>OS: Linux</span>
+        <span>Focus: TFTP • Web • LXD</span>
+      </div>
+    </div>
+
+    <nav class="writeup-toc" aria-label="Inhoudsopgave">
+      <strong>WRITE-UP SECTIONS</strong>
+      <a href="#overview">Overview</a>
+      <a href="#recon">Recon</a>
+      <a href="#enumeration">Enumeration</a>
+      <a href="#access">Initial Access</a>
+      <a href="#privesc">Privilege Escalation</a>
+      <a href="#attack-path">Attack Path</a>
+      <a href="#lessons">Lessons Learned</a>
+    </nav>
+
+    <article class="writeup-article">
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          In deze lab lag de focus voornamelijk op <strong>web enumeration, TFTP,
+          credential reuse en privilege escalation via LXD</strong>.
+        </p>
+        <div class="attack-path">Recon → Enumeration → Initial Access → Privilege Escalation</div>
+      </section>
+
+      <section id="recon">
+        <h2>Reconnaissance</h2>
+        <p>Ik begon de machine met mijn <strong>Superscanv2</strong>-workflow.</p>
+        <table class="writeup-table">
+          <thead>
+            <tr><th>Port</th><th>Service</th><th>Waarom interessant?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>80/tcp</td><td>HTTP</td><td>Webapplicatie aanwezig</td></tr>
+            <tr><td>69/udp</td><td>TFTP</td><td>Bestandsoverdracht zonder gebruikersauthenticatie</td></tr>
+          </tbody>
+        </table>
+        <p>
+          De combinatie van een webserver en een onbeveiligde TFTP-service was direct
+          interessant, omdat beide services mogelijk toegang hadden tot dezelfde bestanden.
+        </p>
+      </section>
+
+      <section id="enumeration">
+        <h2>Enumeration</h2>
+        <p>Tijdens verdere enumeratie ontdekte ik een actieve TFTP-service:</p>
+        <ul>
+          <li><strong>Geen authenticatie:</strong> de TFTP-service accepteerde aanvragen zonder gebruikersauthenticatie.</li>
+          <li><strong>Schrijfrechten:</strong> bestanden konden naar de TFTP-root worden geschreven.</li>
+          <li><strong>Gedeelde webroot:</strong> de TFTP-root bleek gekoppeld aan <code>/var/www/html/</code>, de webroot van de HTTP-service.</li>
+        </ul>
+        <div class="writeup-callout">
+          De belangrijkste aanwijzing was dat een bestand dat via TFTP werd geplaatst,
+          vervolgens via de webserver bereikbaar kon zijn.
+        </div>
+      </section>
+
+      <section id="access">
+        <h2>Initial Access</h2>
+        <p>
+          Uit de enumeratie bleek dat de combinatie van <strong>ongeauthenticeerde
+          TFTP-schrijfrechten</strong> en een actieve PHP-webserver kon worden misbruikt
+          om server-side code in de webroot te plaatsen.
+        </p>
+        <div class="attack-path">TFTP upload → PHP webshell → toegang als www-data</div>
+        <p>
+          Nadat de webshell via HTTP werd aangeroepen, verkreeg ik initiële toegang als
+          de beperkte webservergebruiker <code>www-data</code>.
+        </p>
+
+        <h3>Credential Discovery</h3>
+        <p>
+          Tijdens inspectie van de webroot werden <code>.htaccess</code> en
+          <code>.htpasswd</code> aangetroffen. Het <code>.htpasswd</code>-bestand bevatte
+          bruikbare authenticatiegegevens. Zonder het wachtwoord te publiceren, kon ik
+          hiermee lokaal overschakelen naar de interactieve gebruiker <code>mike</code>.
+        </p>
+        <pre><code>www-data@included:/var/www/html$ su mike
+Password: [REDACTED]
+mike@included:/var/www/html$</code></pre>
+      </section>
+
+      <section id="privesc">
+        <h2>Privilege Escalation</h2>
+        <p>
+          Na toegang als <code>mike</code> begon ik met lokale enumeratie. Daarbij
+          controleerde ik onder andere groepslidmaatschappen, sudo/SUID-rechten,
+          services, configuratiebestanden en geplande taken.
+        </p>
+        <p>
+          De belangrijkste ontdekking was dat de gebruiker lid was van de lokale
+          <strong>LXD-groep</strong>. Dit groepslidmaatschap gaf voldoende rechten om een
+          geprivilegieerde Linux-container te starten en de root-bestandsstructuur van de
+          host daarin te koppelen.
+        </p>
+        <p>
+          Via deze container kon de gekoppelde host-schijf met verhoogde rechten worden
+          benaderd, waardoor uiteindelijk volledige root-toegang tot de host mogelijk was.
+        </p>
+        <div class="attack-path">LXD group membership → privileged container → host filesystem → root</div>
+      </section>
+
+      <section id="attack-path">
+        <h2>Attack Path</h2>
+        <div class="attack-path">Superscanv2 / Nmap
+    ↓
+HTTP + TFTP identificeren
+    ↓
+TFTP-schrijfrechten bevestigen
+    ↓
+Webroot bereikbaar via TFTP
+    ↓
+PHP webshell
+    ↓
+Initial Access als www-data
+    ↓
+.htpasswd ontdekt
+    ↓
+Credential reuse → lokale gebruiker
+    ↓
+LXD-groepslidmaatschap
+    ↓
+Geprivilegieerde container
+    ↓
+Root Access</div>
+      </section>
+
+      <section id="lessons">
+        <h2>Wat ik hiervan heb geleerd</h2>
+        <ul>
+          <li><strong>Service chaining:</strong> twee afzonderlijke services kunnen samen een bruikbaar aanvalspad vormen.</li>
+          <li><strong>Credential reuse:</strong> credentials uit een webconfiguratie kunnen ook elders bruikbaar zijn.</li>
+          <li><strong>Least Privilege:</strong> lidmaatschap van krachtige containergroepen kan praktisch root-equivalent zijn.</li>
+        </ul>
+        <div class="writeup-callout">
+          Deze lab liet goed zien hoe meerdere relatief kleine misconfiguraties samen
+          kunnen escaleren tot volledige systeemovername. Vooral de relatie tussen
+          services en lokale groepsrechten bleek bepalend voor de aanvalsketen.
+        </div>
+
+        <h3>Gebruikte tools</h3>
+        <div class="tags">
+          <span>Superscanv2</span>
+          <span>Nmap</span>
+          <span>Distrobuilder</span>
+          <span>Git</span>
+          <span>Python</span>
+        </div>
+      </section>
+    </article>
+
+    <p class="writeup-disclaimer">
+      Deze write-up is uitsluitend bedoeld voor educatieve doeleinden binnen een
+      gecontroleerde Hack The Box-omgeving. IP-adressen, flags, wachtwoorden en andere
+      gevoelige gegevens worden niet gepubliceerd.
+    </p>
+  </main>
+</body>
+</html>

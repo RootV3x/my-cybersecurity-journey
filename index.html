@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="My Journey of Becoming a Cybersecurity Ethical Hacker - persoonlijke cybersecurity portfolio en leerjournaal."
+  >
+  <title>My Journey of Becoming a Cybersecurity Ethical Hacker</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="logo" href="#home"><span>&gt;_</span> Azzemon</a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Navigatie openen"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav" aria-label="Hoofdnavigatie">
+      <a href="#home">Home</a>
+      <a href="#about">Over mij</a>
+      <a href="#journey">Journey</a>
+      <a href="#skills">Skills</a>
+      <a href="#progress">Progress</a>
+      <a href="#certificates">Certificaten</a>
+      <a href="#writeups">Write-ups</a>
+      <a href="#projects">Projects</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <p class="eyebrow">CYBERSECURITY • ETHICAL HACKING • DEVELOPMENT</p>
+
+        <h1>
+          My Journey of Becoming a
+          <span>Cybersecurity Ethical Hacker</span>
+        </h1>
+
+        <p class="hero-copy">
+          Van mijn eerste stappen op Hack The Box tot het leren bouwen en doorgronden
+          van scripts, netwerken en webapplicaties. Dit is mijn persoonlijke reis
+          richting penetration testing en cybersecurity.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button primary" href="#journey">Bekijk mijn journey</a>
+          <a class="button secondary" href="#progress">Bekijk mijn progress</a>
+        </div>
+
+        <div class="quick-stats" aria-label="Cybersecurity voortgang">
+          <article>
+            <strong>31</strong>
+            <span>HTB Academy modules</span>
+          </article>
+          <article>
+            <strong>94.3%</strong>
+            <span>Junior Cybersecurity Analyst</span>
+          </article>
+          <article>
+            <strong>2</strong>
+            <span>Getoonde certificaten</span>
+          </article>
+        </div>
+
+        <div class="terminal" aria-label="Terminal voorbeeld">
+          <div class="terminal-top">
+            <span></span><span></span><span></span>
+            <p>azzemon@cyberlab:~</p>
+          </div>
+
+          <div class="terminal-body">
+            <p><span class="prompt">$</span> whoami</p>
+            <p class="output">aspiring_penetration_tester</p>
+
+            <p><span class="prompt">$</span> cat current_focus.txt</p>
+            <p class="output">
+              HTB Academy • Penetration Testing • Python • SQL • Web Development
+            </p>
+
+            <p><span class="prompt">$</span> echo "Keep learning. Keep building."</p>
+            <p class="output">
+              Keep learning. Keep building.<span class="cursor">█</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="section-heading">
+        <p class="section-number">01.</p>
+        <h2>Over Mij</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-copy">
+          <p>
+            Mijn reis in de cybersecurity begon in het voorjaar van 2026 op
+            <strong>Hack The Box</strong>, waar ik momenteel word opgeleid tot
+            <strong>Penetration Tester</strong>.
+          </p>
+
+          <p>
+            Om de scripts en webapplicaties die ik tijdens het hacken tegenkom écht
+            te doorgronden, ben ik als aanvulling gaan leren coderen via
+            <strong>Mimo</strong>. Hier focus ik me op
+            <strong>Python, SQL, HTML, CSS en JavaScript</strong>.
+          </p>
+
+          <p>
+            Ik ervaar het leren van deze programmeertalen als een ontspannen en
+            logische volgende stap in mijn ontwikkeling tot security-expert.
+          </p>
+
+          <p>
+            Inmiddels combineer ik offensive-securityonderwerpen met networking,
+            traffic analysis, Windows, Linux, Active Directory en onderdelen van
+            incident handling. Hierdoor leer ik systemen niet alleen aanvallen, maar
+            ook beter begrijpen vanuit het perspectief van verdediging en analyse.
+          </p>
+        </div>
+
+        <aside class="profile-card">
+          <div class="profile-icon">&lt;/&gt;</div>
+          <h3>Current mission</h3>
+          <p>
+            Van nieuwsgierige beginner naar een technisch brede en zelfstandig
+            werkende penetration tester.
+          </p>
+
+          <div class="profile-stat">
+            <span>Status</span>
+            <strong>ACTIVE LEARNING</strong>
+          </div>
+          <div class="profile-stat">
+            <span>Start</span>
+            <strong>SPRING 2026</strong>
+          </div>
+          <div class="profile-stat">
+            <span>Focus</span>
+            <strong>OFFENSIVE SECURITY</strong>
+          </div>
+          <div class="profile-stat">
+            <span>Platform</span>
+            <strong>HTB ACADEMY</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- JOURNEY -->
+    <section class="section" id="journey">
+      <div class="section-heading">
+        <p class="section-number">02.</p>
+        <h2>My Journey</h2>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-marker"></div>
+          <p class="timeline-date">Voorjaar 2026</p>
+          <h3>De start op Hack The Box</h3>
+          <p>
+            Mijn eerste serieuze stappen in cybersecurity. Ik begin met Linux,
+            networking, information security, enumeration en de basis van
+            penetration testing.
+          </p>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-marker"></div>
+          <p class="timeline-date">2026</p>
+          <h3>Penetration testing wordt breder</h3>
+          <p>
+            Ik verdiep me in Nmap, footprinting, web requests, Metasploit,
+            vulnerability assessment, shells & payloads, Windows, Active Directory
+            en network traffic analysis.
+          </p>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-marker"></div>
+          <p class="timeline-date">Juli 2026</p>
+          <h3>ISC2 Certified in Cybersecurity</h3>
+          <p>
+            Een belangrijke mijlpaal waarmee ik mijn kennis van cybersecurity
+            fundamentals verder onderbouw.
+          </p>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-marker"></div>
+          <p class="timeline-date">Augustus 2026</p>
+          <h3>Python Development</h3>
+          <p>
+            Via Mimo behaal ik mijn Python Development credential en blijf ik
+            programmeren gebruiken om securityconcepten beter te begrijpen.
+          </p>
+        </article>
+
+        <article class="timeline-item">
+          <div class="timeline-marker"></div>
+          <p class="timeline-date">September 2026</p>
+          <h3>31 HTB Academy modules afgerond</h3>
+          <p>
+            Mijn leerpad groeit verder richting offensive security, web security,
+            operating systems, networking, traffic analysis en security operations.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="section-heading">
+        <p class="section-number">03.</p>
+        <h2>Skills ontwikkeld</h2>
+      </div>
+
+      <p class="section-intro">
+        Mijn skills komen voort uit hands-on labs, Academy-modules, programmeren
+        en het zelf documenteren van wat ik leer.
+      </p>
+
+      <div class="skills-grid">
+        <article class="skill-card">
+          <p class="skill-icon">⌘</p>
+          <h3>Penetration Testing</h3>
+          <p>
+            Een systematische pentest uitvoeren: van voorbereiding en footprinting
+            tot enumeration, vulnerability assessment en exploitation.
+          </p>
+          <div class="tags">
+            <span>Footprinting</span>
+            <span>Nmap</span>
+            <span>Metasploit</span>
+            <span>Vulnerability Assessment</span>
+            <span>Shells & Payloads</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <p class="skill-icon">◎</p>
+          <h3>Networking & Traffic Analysis</h3>
+          <p>
+            Netwerkfundamenten, protocollen en verkeer analyseren om systemen,
+            services en afwijkend gedrag beter te begrijpen.
+          </p>
+          <div class="tags">
+            <span>TCP/IP</span>
+            <span>DNS</span>
+            <span>Network Enumeration</span>
+            <span>Wireshark</span>
+            <span>Traffic Analysis</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <p class="skill-icon">&lt;/&gt;</p>
+          <h3>Web Security</h3>
+          <p>
+            Webapplicaties en HTTP-verkeer onderzoeken, webinformatie verzamelen
+            en veelvoorkomende aanvalstechnieken beter doorgronden.
+          </p>
+          <div class="tags">
+            <span>Web Requests</span>
+            <span>Web Applications</span>
+            <span>WordPress</span>
+            <span>JavaScript Deobfuscation</span>
+            <span>Bug Bounty</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <p class="skill-icon">#</p>
+          <h3>Linux & Bash</h3>
+          <p>
+            Werken met Linux-systemen, Kali Linux, Bash, command-line tooling,
+            bestandsoverdracht, permissies en services.
+          </p>
+          <div class="tags">
+            <span>Kali Linux</span>
+            <span>Bash</span>
+            <span>SSH</span>
+            <span>File Transfers</span>
+            <span>CLI</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <p class="skill-icon">WIN</p>
+          <h3>Windows & Active Directory</h3>
+          <p>
+            Windows-fundamenten, de Windows command line, Active Directory en
+            Windows event logging vanuit een securityperspectief.
+          </p>
+          <div class="tags">
+            <span>Windows</span>
+            <span>Command Line</span>
+            <span>Active Directory</span>
+            <span>Event Logs</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <p class="skill-icon">SOC</p>
+          <h3>Security Operations</h3>
+          <p>
+            Basisvaardigheden rond information security, incident handling,
+            event-loganalyse en het herkennen van security-events.
+          </p>
+          <div class="tags">
+            <span>Incident Handling</span>
+            <span>Information Security</span>
+            <span>Log Analysis</span>
+            <span>SOC Fundamentals</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <p class="skill-icon">Py</p>
+          <h3>Python</h3>
+          <p>
+            Python gebruiken voor logica, automatisering, securityscripts,
+            datastructuren en eigen leerprojecten.
+          </p>
+          <div class="tags">
+            <span>Python</span>
+            <span>Automation</span>
+            <span>Scripting</span>
+            <span>Dictionaries</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <p class="skill-icon">DB</p>
+          <h3>SQL & Databases</h3>
+          <p>
+            SQL-queries en databases begrijpen om zowel development als
+            securityvraagstukken beter te kunnen analyseren.
+          </p>
+          <div class="tags">
+            <span>SQL</span>
+            <span>Databases</span>
+            <span>Queries</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <p class="skill-icon">WEB</p>
+          <h3>Web Development</h3>
+          <p>
+            Zelf webpagina's bouwen om de structuur, styling en logica van
+            webapplicaties ook vanuit de ontwikkelaarskant te begrijpen.
+          </p>
+          <div class="tags">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- HTB PROGRESS -->
+    <section class="section" id="progress">
+      <div class="section-heading">
+        <p class="section-number">04.</p>
+        <h2>HTB Academy Progress</h2>
+      </div>
+
+      <div class="progress-hero">
+        <div>
+          <p class="eyebrow">HANDS-ON LEARNING</p>
+          <h3>31 completed module badges</h3>
+          <p>
+            Mijn Academy-progress laat zien hoe mijn basis zich uitbreidt over
+            offensive security, networking, web, Windows, Linux en analysis.
+          </p>
+        </div>
+
+        <div class="progress-number">
+          <strong>31</strong>
+          <span>completed</span>
+        </div>
+      </div>
+
+      <div class="path-grid">
+        <article class="path-card featured">
+          <div class="path-top">
+            <div>
+              <p class="path-label">JOB ROLE PATH</p>
+              <h3>Junior Cybersecurity Analyst</h3>
+            </div>
+            <strong>94.3%</strong>
+          </div>
+          <div class="progress-track">
+            <span style="width: 94.3%"></span>
+          </div>
+        </article>
+
+        <article class="path-card">
+          <div class="path-top">
+            <div>
+              <p class="path-label">SKILL PATH</p>
+              <h3>SOC Analyst Prerequisites</h3>
+            </div>
+            <strong>85.6%</strong>
+          </div>
+          <div class="progress-track">
+            <span style="width: 85.6%"></span>
+          </div>
+        </article>
+
+        <article class="path-card">
+          <div class="path-top">
+            <div>
+              <p class="path-label">SKILL PATH</p>
+              <h3>Operating System Fundamentals</h3>
+            </div>
+            <strong>57.9%</strong>
+          </div>
+          <div class="progress-track">
+            <span style="width: 57.9%"></span>
+          </div>
+        </article>
+
+        <article class="path-card">
+          <div class="path-top">
+            <div>
+              <p class="path-label">SKILL PATH</p>
+              <h3>CREST CCT APP Preparation</h3>
+            </div>
+            <strong>39.1%</strong>
+          </div>
+          <div class="progress-track">
+            <span style="width: 39.1%"></span>
+          </div>
+        </article>
+
+        <article class="path-card">
+          <div class="path-top">
+            <div>
+              <p class="path-label">SKILL PATH</p>
+              <h3>CREST CPSA/CRT Preparation</h3>
+            </div>
+            <strong>35.7%</strong>
+          </div>
+          <div class="progress-track">
+            <span style="width: 35.7%"></span>
+          </div>
+        </article>
+
+        <article class="path-card">
+          <div class="path-top">
+            <div>
+              <p class="path-label">SKILL PATH</p>
+              <h3>CREST CCT INF Preparation</h3>
+            </div>
+            <strong>30.7%</strong>
+          </div>
+          <div class="progress-track">
+            <span style="width: 30.7%"></span>
+          </div>
+        </article>
+
+        <article class="path-card">
+          <div class="path-top">
+            <div>
+              <p class="path-label">SKILL PATH</p>
+              <h3>Basic Toolset</h3>
+            </div>
+            <strong>29%</strong>
+          </div>
+          <div class="progress-track">
+            <span style="width: 29%"></span>
+          </div>
+        </article>
+      </div>
+
+      <div class="completed-paths">
+        <article>
+          <span class="check">✓</span>
+          <div>
+            <p class="path-label">COMPLETED SKILL PATH</p>
+            <h3>Cracking Into Hack The Box</h3>
+          </div>
+        </article>
+
+        <article>
+          <span class="check">✓</span>
+          <div>
+            <p class="path-label">COMPLETED SKILL PATH</p>
+            <h3>Information Security Foundations</h3>
+          </div>
+        </article>
+      </div>
+
+      <details class="module-list">
+        <summary>Bekijk een selectie van afgeronde HTB Academy modules</summary>
+
+        <div class="module-tags">
+          <span>Learning Process</span>
+          <span>Introduction to Academy</span>
+          <span>Hacking WordPress</span>
+          <span>Linux Fundamentals</span>
+          <span>Network Enumeration with Nmap</span>
+          <span>Introduction to Bash Scripting</span>
+          <span>File Transfers</span>
+          <span>Introduction to Networking</span>
+          <span>Web Requests</span>
+          <span>Using the Metasploit Framework</span>
+          <span>JavaScript Deobfuscation</span>
+          <span>Windows Fundamentals</span>
+          <span>Introduction to Active Directory</span>
+          <span>Introduction to Web Applications</span>
+          <span>Getting Started</span>
+          <span>Intro to Network Traffic Analysis</span>
+          <span>Setting Up</span>
+          <span>Penetration Testing Process</span>
+          <span>Vulnerability Assessment</span>
+          <span>Footprinting</span>
+          <span>Shells &amp; Payloads</span>
+          <span>Information Gathering - Web Edition</span>
+          <span>Bug Bounty Hunting Process</span>
+          <span>Introduction to Windows Command Line</span>
+          <span>Incident Handling Process</span>
+          <span>Windows Event Logs</span>
+          <span>Introduction to Information Security</span>
+          <span>Introduction to Penetration Testing</span>
+          <span>Network Foundations</span>
+          <span>Pentest in a Nutshell</span>
+          <span>Malware Traffic Analysis with Wireshark</span>
+        </div>
+      </details>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section class="section" id="certificates">
+      <div class="section-heading">
+        <p class="section-number">05.</p>
+        <h2>Certificaten & Credentials</h2>
+      </div>
+
+      <div class="certificate-grid">
+        <article class="certificate-card">
+          <div class="certificate-badge">ISC2</div>
+          <div>
+            <p class="project-type">CYBERSECURITY</p>
+            <h3>Certified in Cybersecurity</h3>
+            <p class="issuer">ISC2</p>
+            <p>
+              Toegekend in juli 2026. Gericht op cybersecurity fundamentals en een
+              brede basis in informatiebeveiliging.
+            </p>
+            <div class="tags">
+              <span>Cybersecurity Fundamentals</span>
+              <span>ISC2</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="certificate-card">
+          <div class="certificate-badge">&lt;Py&gt;</div>
+          <div>
+            <p class="project-type">DEVELOPMENT</p>
+            <h3>Python Development</h3>
+            <p class="issuer">Mimo</p>
+            <p>
+              Uitgegeven in augustus 2026. Onderdeel van mijn ontwikkeling in
+              programmeren en het beter begrijpen van security tooling en scripts.
+            </p>
+            <div class="tags">
+              <span>Python</span>
+              <span>Programming</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <p class="privacy-note">
+        Credential- en referentienummers worden bewust niet publiek op deze website
+        weergegeven.
+      </p>
+    </section>
+
+    <!-- HTB WRITE-UPS -->
+    <section class="section" id="writeups">
+      <div class="section-heading">
+        <p class="section-number">06.</p>
+        <h2>HTB Write-ups</h2>
+      </div>
+
+      <p class="section-intro">
+        Korte, duidelijke verslagen van Hack The Box labs. Ik documenteer de relevante
+        aanvalsketen en vooral de reden achter iedere stap. Flags, doel-IP-adressen,
+        wachtwoorden en andere gevoelige gegevens worden bewust niet gepubliceerd.
+      </p>
+
+      <div class="writeup-workflow" aria-label="Write-up workflow">
+        <span>Superscanv2</span>
+        <b>→</b>
+        <span>Recon</span>
+        <b>→</b>
+        <span>Enumeration</span>
+        <b>→</b>
+        <span>Initial Access</span>
+        <b>→</b>
+        <span>Privilege Escalation</span>
+        <b>→</b>
+        <span>Lessons Learned</span>
+      </div>
+
+      <div class="writeups-grid">
+        <article class="writeup-card writeup-card-featured">
+          <div class="writeup-card-top">
+            <div>
+              <p class="project-type">WRITE-UP SYSTEM</p>
+              <h3>Vaste HTB write-up layout</h3>
+            </div>
+            <span class="status-badge">READY</span>
+          </div>
+          <p>
+            Iedere lab krijgt dezelfde structuur: overzicht, reconnaissance,
+            enumeration, initial access, privilege escalation, attack path en leerpunten.
+          </p>
+          <div class="tags">
+            <span>Superscanv2</span>
+            <span>Markdown</span>
+            <span>HTB</span>
+          </div>
+          <a class="text-link" href="writeups/_template.html">Bekijk de write-up layout →</a>
+        </article>
+
+        <article class="writeup-card">
+          <div class="writeup-card-top">
+            <div>
+              <p class="project-type">HTB WRITE-UP</p>
+              <h3>Included</h3>
+            </div>
+            <span class="status-badge">PUBLISHED</span>
+          </div>
+          <p>
+            Een aanvalsketen via onbeveiligde TFTP-schrijfrechten, credential reuse
+            en privilege escalation via LXD.
+          </p>
+          <div class="writeup-meta">
+            <span>OS: Linux</span>
+            <span>Difficulty: Very Easy</span>
+          </div>
+          <div class="tags">
+            <span>TFTP</span>
+            <span>Web</span>
+            <span>LXD</span>
+          </div>
+          <a class="text-link" href="writeups/included.html">Lees de write-up →</a>
+        </article>
+
+        <article class="writeup-card">
+          <div class="writeup-card-top">
+            <div>
+              <p class="project-type">HTB WRITE-UP</p>
+              <h3>Markup</h3>
+            </div>
+            <span class="status-badge">PUBLISHED</span>
+          </div>
+          <p>
+            XXE in een webapplicatie leidt tot het uitlezen van een SSH-private key,
+            gevolgd door Windows privilege escalation via een schrijfbaar batchbestand.
+          </p>
+          <div class="writeup-meta">
+            <span>OS: Windows</span>
+            <span>Difficulty: Easy</span>
+          </div>
+          <div class="tags">
+            <span>XXE</span>
+            <span>SSH</span>
+            <span>Windows</span>
+          </div>
+          <a class="text-link" href="writeups/markup.html">Lees de write-up →</a>
+        </article>
+      </div>
+
+      <div class="publication-note">
+        <p><strong>Publicatieprincipe:</strong> leg uit wat je hebt geleerd zonder de lab-oplossing onnodig prijs te geven.</p>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="section-heading">
+        <p class="section-number">07.</p>
+        <h2>Projects & Labs</h2>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <div>
+            <p class="project-type">PYTHON PROJECT</p>
+            <h3>Port Database</h3>
+            <p>
+              Een Python-project waarin bekende netwerkpoorten, services,
+              beschrijvingen en pentest-tips worden verzameld.
+            </p>
+          </div>
+
+          <div class="tags">
+            <span>Python</span>
+            <span>Networking</span>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <p class="project-type">HACK THE BOX</p>
+            <h3>HTB Labs</h3>
+            <p>
+              Praktijklabs waarin ik enumeration, networking, Linux, Windows,
+              websecurity en penetration-testingtechnieken oefen.
+            </p>
+          </div>
+
+          <div>
+            <div class="tags">
+              <span>HTB</span>
+              <span>Labs</span>
+              <span>Write-ups</span>
+            </div>
+            <a class="text-link" href="#writeups">Bekijk HTB write-ups →</a>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div>
+            <p class="project-type">LEARNING</p>
+            <h3>Cybersecurity Knowledge Base</h3>
+            <p>
+              Mijn persoonlijke verzameling notities, cheat sheets en uitleg over
+              cybersecurity, Linux, Python, SQL, networking en websecurity.
+            </p>
+          </div>
+
+          <div class="tags">
+            <span>Obsidian</span>
+            <span>Notes</span>
+            <span>Research</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ETHICS -->
+    <section class="ethics section">
+      <div class="ethics-card">
+        <p class="section-number">ETHICAL HACKING</p>
+        <h2>Learn legally. Hack ethically.</h2>
+        <p>
+          Alle technieken, labs en write-ups op deze website zijn bedoeld voor
+          educatieve doeleinden en worden uitsluitend toegepast op systemen waarvoor
+          expliciete toestemming bestaat, zoals gecontroleerde trainingsomgevingen.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built while learning cybersecurity <span>♥</span> 2026</p>
+    <a href="#home">Back to top ↑</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
